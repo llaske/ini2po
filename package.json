@@ -1,0 +1,9 @@
+{
+	"name": "ini2po",
+	"description": "webL10n JavaScript ini file to GNU gettext PO file converter",
+	"version": "0.0.1",
+	"private": true,
+	"dependencies": {
+		"ini": "1.1.x"
+	}
+}
