@@ -1,5 +1,5 @@
 
-ini2po is a command script to generate [https://www.gnu.org/software/gettext/manual/html_node/PO-Files.html](gettext PO files) from [https://github.com/fabi1cazenave/webL10n](INI file formatted for webl10n).
+ini2po is a command script to generate [gettext PO files](https://www.gnu.org/software/gettext/manual/html_node/PO-Files.html) from [INI file formatted for webl10n](https://github.com/fabi1cazenave/webL10n).
 
 	node ini2po.js <inifile>
 
