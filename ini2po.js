@@ -22,6 +22,7 @@ var constSub3 = [
 	'"Content-Transfer-Encoding: 8bit\\n"',
 	'"X-Generator: ini2po 0.0.1\\n"'
 ];
+var constComment = '#. Do not translate';
 
 // Generate function
 function addContent(content, from) {
@@ -97,11 +98,20 @@ if (filename) {
 			var section = sections[language];
 			var items = Object.keys(section);
 			for (var j = 0 ; j < items.length ; j++) {
+				// Generate lines
+				var msgid = defaultSection[items[j]];
+				var currentTranslation = section[items[j]];
+				var res = msgid.match(/{{[^}}]+}}/g);
+				if (res && res.length) {
+					var comment = constComment;
+					for (var k = 0 ; k < res.length ; k++) {
+						comment += ' ' + res[k];
+					}
+					content = addContent(comment, content);
+				}
 				content = addContent('#: '+items[j], content);
 				content = addContent('msgctx "'+items[j]+'"', content);
-				var msgid = defaultSection[items[j]];
 				content = addContent('msgid "'+msgid+'"', content);
-				var currentTranslation = section[items[j]];
 				if (language != defaultSectionIndex && msgid == currentTranslation) {
 					content = addContent('msgstr ""', content);
 				} else {
