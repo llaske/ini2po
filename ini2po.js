@@ -12,7 +12,8 @@ var constSub1 = [
 	'"Project-Id-Version: PACKAGE VERSION\\n"',
 	'"Report-Msgid-Bugs-To: \\n"'
 ];
-var constSub2 = 'POT-Creation-Date: ';
+var constSub2 = '"POT-Creation-Date: ';
+var constSub2b = '\\n"';
 var constSub3 = [
 	'"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\\n"',
 	'"Last-Translator: FULL NAME <EMAIL@ADDRESS>\\n"',
@@ -90,7 +91,7 @@ if (filename) {
 			var content = '';
 			content = addContent(constHeader + filename, content);
 			content = addContent(constSub1, content);
-			content = addContent(constSub2 + new Date().toString(), content);
+			content = addContent(constSub2 + new Date().toString() + constSub2b, content);
 			content = addContent(constSub3, content);
 			content = addCrLf(content);
 
@@ -110,7 +111,7 @@ if (filename) {
 					content = addContent(comment, content);
 				}
 				content = addContent('#: '+items[j], content);
-				content = addContent('msgctx "'+items[j]+'"', content);
+				content = addContent('msgctxt "'+items[j]+'"', content);
 				content = addContent('msgid "'+msgid+'"', content);
 				if (language != defaultSectionIndex && msgid == currentTranslation) {
 					content = addContent('msgstr ""', content);
