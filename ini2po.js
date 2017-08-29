@@ -3,6 +3,7 @@
 // Template
 var starLang = '*';
 var enLang = 'en';
+var templateFileName = 'template.pot';
 var crlf = '\n';
 var constHeader = '#. extracted from ';
 var constSub1 = [
@@ -123,6 +124,9 @@ if (filename) {
 
 			// Write file
 			var outputname = language + '.po';
+			if (language == starLang) {
+				outputname = templateFileName;
+			}
 	 		console.log(outputname + ' generated');
 			fs.writeFile(outputname, content, 'utf8', function(err) {
 				if (err) throw err;
