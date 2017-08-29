@@ -101,6 +101,10 @@ if (filename) {
 			for (var j = 0 ; j < items.length ; j++) {
 				// Generate lines
 				var msgid = defaultSection[items[j]];
+				if (msgid == null) {
+					console.warn("WARNING: string '"+items[j]+"' in '"+language+"' not in default language");
+					continue;
+				}
 				var currentTranslation = section[items[j]];
 				var res = msgid.match(/{{[^}}]+}}/g);
 				if (res && res.length) {
