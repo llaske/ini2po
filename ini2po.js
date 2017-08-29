@@ -113,11 +113,7 @@ if (filename) {
 				content = addContent('#: '+items[j], content);
 				content = addContent('msgctxt "'+items[j]+'"', content);
 				content = addContent('msgid "'+msgid+'"', content);
-				if (language != defaultSectionIndex && msgid == currentTranslation) {
-					content = addContent('msgstr ""', content);
-				} else {
-					content = addContent('msgstr "'+currentTranslation+'"', content);
-				}
+				content = addContent('msgstr "'+currentTranslation+'"', content);
 				content = addCrLf(content);
 			}
 
