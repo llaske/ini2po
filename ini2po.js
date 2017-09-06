@@ -96,6 +96,12 @@ if (filename) {
 			content = addContent(constSub3, content);
 			content = addCrLf(content);
 
+			// Prepare output file
+			var outputname = language + '.po';
+			if (language == starLang) {
+				outputname = templateFileName;
+			}
+
 			// Iterate on each string
 			var section = sections[language];
 			var items = Object.keys(section);
@@ -118,15 +124,15 @@ if (filename) {
 				content = addContent('#: '+items[j], content);
 				content = addContent('msgctxt "'+items[j]+'"', content);
 				content = addContent('msgid "'+msgid.replace(/"/g,'\\"')+'"', content);
-				content = addContent('msgstr "'+currentTranslation.replace(/"/g,'\\"')+'"', content);
+				if (outputname != templateFileName) {
+					content = addContent('msgstr "'+currentTranslation.replace(/"/g,'\\"')+'"', content);
+				} else {
+					content = addContent('msgstr ""', content);
+				}
 				content = addCrLf(content);
 			}
 
 			// Write file
-			var outputname = language + '.po';
-			if (language == starLang) {
-				outputname = templateFileName;
-			}
 	 		console.log(outputname + ' generated');
 			fs.writeFile(outputname, content, 'utf8', function(err) {
 				if (err) throw err;
