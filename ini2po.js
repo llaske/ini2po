@@ -117,8 +117,8 @@ if (filename) {
 				}
 				content = addContent('#: '+items[j], content);
 				content = addContent('msgctxt "'+items[j]+'"', content);
-				content = addContent('msgid "'+msgid+'"', content);
-				content = addContent('msgstr "'+currentTranslation+'"', content);
+				content = addContent('msgid "'+msgid.replace(/"/g,'\\"')+'"', content);
+				content = addContent('msgstr "'+currentTranslation.replace(/"/g,'\\"')+'"', content);
 				content = addCrLf(content);
 			}
 
