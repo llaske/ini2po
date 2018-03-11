@@ -4,6 +4,9 @@
 	"version": "0.0.1",
 	"private": true,
 	"dependencies": {
-		"ini": "1.1.x"
+		"ini": "1.1.x",
+		"path": "0.x",
+		"readline": "1.x",
+		"minimist": "1.x"
 	}
 }
