@@ -6,7 +6,7 @@
 	"dependencies": {
 		"ini": "1.1.x",
 		"path": "0.x",
-		"readline": "1.x",
+		"line-reader": "0.x",
 		"minimist": "1.x"
 	}
 }
