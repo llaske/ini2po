@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // webL10n JavaScript ini file to GNU gettext PO file converter
 
 // Template

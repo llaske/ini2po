@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // GNU gettext PO to webL10n JavaScript ini file converter
 
 // Require
@@ -20,9 +21,10 @@ var outputFile = defaultOutputfile;
 if (argv.o) {
 	outputFile = argv.o;
 }
+var content = "";
 
 // Processing function
-function processFiles(fd, filenames, index) {
+function processFiles(filenames, index) {
 	var basename = path.basename(filenames[index]);
 	var sectioname = (basename == defaultTemplateFile ? "*" : basename.substr(0,basename.indexOf(".")));
 
@@ -36,7 +38,7 @@ function processFiles(fd, filenames, index) {
 		// Write setHeader
 		if (state == -1) {
 			console.log("Process "+filenames[index]+"...")
-			fs.write(fd, crlf+"["+sectioname+"]"+crlf);
+			content += crlf+"["+sectioname+"]"+crlf;
 			state = 0;
 		}
 
@@ -80,7 +82,7 @@ function processFiles(fd, filenames, index) {
 			if (isMsgstr) {
 				msgstr = (isMsgstr.length > 1) ? isMsgstr[1] : "";
 				if (last) {
-					fs.write(fd, msgctxt + "=" + msgstr + crlf);
+					content += msgctxt + "=" + msgstr + crlf;
 				}
 				state = 5;
 			}
@@ -88,32 +90,35 @@ function processFiles(fd, filenames, index) {
 			if (isString) {
 				msgstr += (isString.length > 1) ? isString[1] : "";
 				if (last) {
-					fs.write(fd, msgctxt + "=" + msgstr + crlf);
+					content += msgctxt + "=" + msgstr + crlf;
 				}
 			} else {
-				fs.write(fd, msgctxt + "=" + msgstr + crlf);
+				content += msgctxt + "=" + msgstr + crlf;
 				msgid = msgctxt = msgstr = "";
 				state = 0;
 			}
 		}
 
 		// Process next file
-		if (last && (index+1) < filenames.length) {
-			processFiles(fd, filenames, index+1);
+		if (last) {
+			if ((index+1) < filenames.length) {
+				processFiles(filenames, index+1);
+			} else {
+				fs.writeFile(outputFile, content, 'utf8', function(err) {
+					if (err) throw err;
+				});
+			}
 		}
 	});
 }
 
-// Create output file
+// Load all files
 var crlf = '\n';
-fs.open(outputFile, 'w', function(err, fd) {
-	// Load all files
-	var filenames = [];
-	for (var i = 0 ; i < argv._.length ; i++) {
-		var name = argv._[i];
-		filenames.push(name);
-	}
+var filenames = [];
+for (var i = 0 ; i < argv._.length ; i++) {
+	var name = argv._[i];
+	filenames.push(name);
+}
 
-	// Process files
-	processFiles(fd, filenames, 0);
-});
+// Process files
+processFiles(filenames, 0);
