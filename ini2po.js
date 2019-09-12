@@ -56,7 +56,7 @@ var	fs = require('fs'),
 // Get INI filename
 var filename = null;
 if (process.argv.length != 3) {
-	console.log("Usage: "+process.argv[0]+" ini2po.js <inifile>");
+	console.log("Usage: ini2po <inifile>");
 }
 filename = process.argv[2];
 

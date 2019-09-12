@@ -14,7 +14,7 @@ var defaultTemplateFile = "template.pot";
 // Get arguments
 var argv = minimist(process.argv.slice(2), {string: 'o'});
 if (argv._.length == 0) {
-	console.log("Usage: "+process.argv[0]+" po2ini.js [-o <outputfile>] <pofile1> [<pofile2> ...]");
+	console.log("Usage: po2ini [-o <outputfile>] <pofile1> [<pofile2> ...]");
 	return;
 }
 var outputFile = defaultOutputfile;
