@@ -45,8 +45,8 @@ function processFiles(filenames, index) {
 		// Get line type
 		var isMsgctxt = line.match(/msgctxt\s*"([^"]*)"/);
 		var isMsgid = line.match(/msgid\s*"([^"]*)"/);
-		var isMsgstr = line.match(/msgstr\s*"([^"]*)"/);
-		var isString = line.match(/^"([^"]*)"/);
+		var isMsgstr = line.match(/msgstr\s*"(.*)"$/);
+		var isString = line.match(/^"(.*)"$/);
 		var isOther = (!isMsgctxt && !isMsgid && !isMsgstr && !isString);
 
 		// Look for msgctxt and strings
@@ -82,7 +82,7 @@ function processFiles(filenames, index) {
 			if (isMsgstr) {
 				msgstr = (isMsgstr.length > 1) ? isMsgstr[1] : "";
 				if (last) {
-					content += msgctxt + "=" + msgstr + crlf;
+					content += msgctxt + "=" + msgstr.replace("\\\"","\"") + crlf;
 				}
 				state = 5;
 			}
@@ -90,10 +90,10 @@ function processFiles(filenames, index) {
 			if (isString) {
 				msgstr += (isString.length > 1) ? isString[1] : "";
 				if (last) {
-					content += msgctxt + "=" + msgstr + crlf;
+					content += msgctxt + "=" + msgstr.replace(/\\\"/g,"\"") + crlf;
 				}
 			} else {
-				content += msgctxt + "=" + msgstr + crlf;
+				content += msgctxt + "=" + msgstr.replace(/\\\"/g,"\"") + crlf;
 				msgid = msgctxt = msgstr = "";
 				state = 0;
 			}
