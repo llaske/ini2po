@@ -125,11 +125,7 @@ if (filename) {
 				content = addContent('#: '+items[j], content);
 				content = addContent('msgctxt "'+items[j]+'"', content);
 				content = addContent('msgid "'+msgid.replace(/"/g,'\\"')+'"', content);
-				if (outputname != templateFileName) {
-					content = addContent('msgstr "'+currentTranslation.replace(/"/g,'\\"')+'"', content);
-				} else {
-					content = addContent('msgstr ""', content);
-				}
+				content = addContent('msgstr "'+currentTranslation.replace(/"/g,'\\"')+'"', content);
 				content = addCrLf(content);
 			}
 
