@@ -4,7 +4,7 @@
 	"version": "0.0.1",
 	"private": true,
 	"dependencies": {
-		"ini": "1.1.x",
+		"js-ini": "1.3.0",
 		"line-reader": "0.x",
 		"minimist": "1.x",
 		"path": "0.x"

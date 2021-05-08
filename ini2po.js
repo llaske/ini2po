@@ -51,7 +51,7 @@ function addCrLf(content) {
 
 // Require
 var	fs = require('fs'),
-	ini = require('ini');
+	ini = require('js-ini');
 
 // Get INI filename
 var filename = null;
@@ -66,7 +66,7 @@ if (filename) {
 	fs.readFile(filename, 'utf-8', function(err, read) {
 		// Parse content
 		if (err) throw err;
-		var sections = ini.parse(read);
+		var sections = ini.parse(read, {comment: ";;;", autoTyping: false});
 		var keys = Object.keys(sections);
 
 		// Find default
