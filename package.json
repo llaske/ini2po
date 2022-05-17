@@ -6,7 +6,7 @@
 	"dependencies": {
 		"js-ini": "1.3.0",
 		"line-reader": "0.x",
-		"minimist": "~1.2.3",
+		"minimist": "~1.2.6",
 		"path": "0.x"
 	},
 	"repository": {
